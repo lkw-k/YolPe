@@ -1,0 +1,26 @@
+# 학습 하이퍼파라미터 (README "학습").
+# scripts/train.py가 model을 뺀 나머지를 그대로 Ultralytics train()에 넘긴다.
+
+model: models/yolo26s.pt   # COCO 사전학습. 없으면 자동으로 받는다
+data: configs/data.yaml
+imgsz: 1280          # 960과 비교 실험
+epochs: 50
+batch: 8             # RTX 4070 12GB, imgsz 1280 기준. 자동(-1)은 메모리 측정 중 CUDA OOM으로 죽어서 직접 지정
+optimizer: auto
+max_det: 1000
+
+# 과적합 방지
+# - 매 에폭 val(CrowdHuman val, 학습에 안 씀)로 평가하고, val mAP50-95가 가장 높은 에폭을 best.pt로 저장한다.
+# - val 성능이 patience 에폭 동안 오르지 않으면 학습을 멈춘다 (얼리 스톱).
+patience: 10
+
+# 증강
+mosaic: 1.0
+close_mosaic: 10     # 마지막 10 에폭은 모자이크를 끄고 실제 이미지 분포로 마무리
+scale: 0.5
+fliplr: 0.5
+flipud: 0.0          # CCTV 시점 고정이라 상하 반전 금지
+hsv_v: 0.4           # 실내 조명 변화
+
+project: runs
+name: YolPe

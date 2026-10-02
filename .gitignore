@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# 데이터, 학습 결과, 가중치 (용량이 큼. 가중치는 Hugging Face에 올린다)
+datasets/
+models/
+runs/
+*.pt
+*.onnx
+*.engine
+
+# IDE
+.idea/
+.vscode/

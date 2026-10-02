@@ -1,0 +1,9 @@
+# 학습 데이터셋 정의 (README "데이터 처리"). Ultralytics 형식.
+# scripts/convert_crowdhuman.py가 datasets/person 아래에 images/, labels/를 만든다.
+
+path: datasets/person
+train: images/train
+val: images/val
+
+names:
+  0: person   # 가려진 부분까지 포함한 전체 박스 (CrowdHuman full box)
